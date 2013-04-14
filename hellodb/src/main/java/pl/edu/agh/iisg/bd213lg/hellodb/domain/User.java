@@ -13,37 +13,37 @@ import javax.persistence.Table;
 @Table(name = "user")
 public class User implements Serializable {
 
-	private static final long serialVersionUID = 4152742428120658920L;
+    private static final long serialVersionUID = 4152742428120658920L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column
-	private String userId;
-	
-	@Column(name = "userName", nullable = false)
-	private String userName;
-	
-	@Column(name = "age")
-	private Integer age;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column
+    private String userId;
 
-	public String getUserId() {
-		return userId;
-	}
+    @Column(name = "userName", nullable = false)
+    private String userName;
 
-	public String getUserName() {
-		return userName;
-	}
+    @Column(name = "age")
+    private Integer age;
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+    public String getUserId() {
+        return userId;
+    }
 
-	public Integer getAge() {
-		return age;
-	}
+    public String getUserName() {
+        return userName;
+    }
 
-	public void setAge(Integer age) {
-		this.age = age;
-	}
-	
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
 }
