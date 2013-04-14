@@ -62,7 +62,8 @@
     
     <tx:annotation-driven transaction-manager="txManager"/>
     
-    <bean id="CustomerDAO" class="pl.edu.agh.iisg.bd213lg.hellodb.dao.CustomerDAOImpl">
+    <bean id="CustomerDAO" class="pl.edu.agh.iisg.bd213lg.hellodb.dao.CustomerDAOImpl"
+        scope="">
         <property name="sessionFactory" ref="hibernateSessionFactory" />
     </bean>
 
