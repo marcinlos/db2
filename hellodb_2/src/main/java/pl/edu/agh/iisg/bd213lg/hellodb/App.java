@@ -7,8 +7,14 @@ public class App {
     public static void main(String[] args) {
         try (ConfigurableApplicationContext context = 
                 new ClassPathXmlApplicationContext("Spring-Module.xml")) {
-            HelloDatabase obj = (HelloDatabase) context.getBean("helloBean");
-            obj.sayHello();
+            ConfigurableApplicationContext ctx = 
+                    new ClassPathXmlApplicationContext("Spring-Module.xml");
+            HelloDatabase obj = (HelloDatabase) ctx.getBean("helloBean");
+//            obj.printCustomers();
+//            obj.printCategories();
+//            obj.printShippers();
+//            obj.printProducts();
+            obj.printSuppliers();
         }
     }
 }

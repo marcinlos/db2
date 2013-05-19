@@ -4,15 +4,14 @@
     xmlns:util="http://www.springframework.org/schema/util"
     xmlns:tx="http://www.springframework.org/schema/tx"
     xmlns:context="http://www.springframework.org/schema/context"
-    xsi:schemaLocation="
-    http://www.springframework.org/schema/beans 
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
     http://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/context 
     http://www.springframework.org/schema/context/spring-context-3.1.xsd
     http://www.springframework.org/schema/util 
     http://www.springframework.org/schema/util/spring-util-3.0.xsd
     http://www.springframework.org/schema/tx 
-    http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
     http://www.springframework.org/schema/aop 
     http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
     
@@ -47,14 +46,22 @@
         <property name="annotatedClasses">
             <list>
             <value>pl.edu.agh.iisg.bd213lg.hellodb.domain.Customer</value>
+            <value>pl.edu.agh.iisg.bd213lg.hellodb.domain.Category</value>
+            <value>pl.edu.agh.iisg.bd213lg.hellodb.domain.Shipper</value>
+            <value>pl.edu.agh.iisg.bd213lg.hellodb.domain.Supplier</value>
+            <value>pl.edu.agh.iisg.bd213lg.hellodb.domain.Product</value>
             </list>
         </property>
         <property name="hibernateProperties">
             <value>
             hibernate.dialect=org.hibernate.dialect.MySQLInnoDBDialect
+            hibernate.show_sql=true
+            hibernate.format_sql=true
+            hibernate.use_sql_comments=true
             </value>
         </property>
     </bean>
+    
     
     <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="hibernateSessionFactory" />
@@ -62,9 +69,24 @@
     
     <tx:annotation-driven transaction-manager="txManager"/>
     
-    <bean id="CustomerDAO" class="pl.edu.agh.iisg.bd213lg.hellodb.dao.CustomerDAOImpl"
-        scope="">
-        <property name="sessionFactory" ref="hibernateSessionFactory" />
-    </bean>
+    <bean id="CustomerDAO" 
+        class="pl.edu.agh.iisg.bd213lg.hellodb.dao.CustomerDAOImpl"
+        scope="singleton"/>
+    
+    <bean id="CategoryDAO" 
+        class="pl.edu.agh.iisg.bd213lg.hellodb.dao.CategoryDAOImpl"
+        scope="singleton"/>
+        
+    <bean id="ShipperDAO" 
+        class="pl.edu.agh.iisg.bd213lg.hellodb.dao.ShipperDAOImpl"
+        scope="singleton"/>
+        
+    <bean id="SupplierDAO" 
+        class="pl.edu.agh.iisg.bd213lg.hellodb.dao.SupplierDAOImpl"
+        scope="singleton"/>
+                
+    <bean id="ProductDAO" 
+        class="pl.edu.agh.iisg.bd213lg.hellodb.dao.ProductDAOImpl"
+        scope="singleton"/>
 
 </beans>

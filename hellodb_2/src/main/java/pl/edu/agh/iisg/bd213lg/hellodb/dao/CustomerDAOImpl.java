@@ -7,7 +7,7 @@ public class CustomerDAOImpl extends DAOImpl<Customer, String> implements
         CustomerDAO {
 
     public CustomerDAOImpl() {
-        super(Customer.class);
+        super(Customer.class); 
     }
 
 }
