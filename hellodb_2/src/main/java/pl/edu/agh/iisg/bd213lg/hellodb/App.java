@@ -14,7 +14,7 @@ public class App {
 //            obj.printCategories();
 //            obj.printShippers();
 //            obj.printProducts();
-            obj.printSuppliers();
+//            obj.printSuppliers();
         }
     }
 }

@@ -17,20 +17,6 @@
     <org.springframework.version>3.2.2.RELEASE</org.springframework.version>
   </properties>
   
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.1</version>
-        <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-  
   <repositories>
     <repository>
       <id>springsource-repo</id>
@@ -68,15 +54,8 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
-      <version>4.2.0.CR2</version>
+      <version>4.2.0.Final</version>
     </dependency>
-	
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-entitymanager</artifactId>
-      <version>4.2.1.Final</version>
-    </dependency>
-            
     
     <dependency>
       <groupId>mysql</groupId>
