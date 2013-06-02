@@ -10,6 +10,7 @@ public class App {
             ConfigurableApplicationContext ctx = 
                     new ClassPathXmlApplicationContext("Spring-Module.xml");
             HelloDatabase obj = (HelloDatabase) ctx.getBean("helloBean");
+            obj.getBestOrder();
 //            obj.printCustomers();
 //            obj.printCategories();
 //            obj.printShippers();

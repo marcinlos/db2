@@ -50,6 +50,10 @@
             <value>pl.edu.agh.iisg.bd213lg.hellodb.domain.Shipper</value>
             <value>pl.edu.agh.iisg.bd213lg.hellodb.domain.Supplier</value>
             <value>pl.edu.agh.iisg.bd213lg.hellodb.domain.Product</value>
+            <value>pl.edu.agh.iisg.bd213lg.hellodb.domain.Employee</value>
+            <value>pl.edu.agh.iisg.bd213lg.hellodb.domain.Order</value>
+            <value>pl.edu.agh.iisg.bd213lg.hellodb.domain.OrderDetails</value>
+            <value>pl.edu.agh.iisg.bd213lg.hellodb.domain.OrderDetailsId</value>
             </list>
         </property>
         <property name="hibernateProperties">

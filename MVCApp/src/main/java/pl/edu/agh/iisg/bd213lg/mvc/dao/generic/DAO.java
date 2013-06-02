@@ -1,4 +1,4 @@
-package pl.edu.agh.iisg.bd213lg.hellodb.dao.generic;
+package pl.edu.agh.iisg.bd213lg.mvc.dao.generic;
 
 import java.io.Serializable;
 import java.util.Collection;

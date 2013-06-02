@@ -1,4 +1,4 @@
-package pl.edu.agh.iisg.bd213lg.hellodb.dao.generic;
+package pl.edu.agh.iisg.bd213lg.mvc.dao.generic;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Example;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 public class DAOImpl<T, Id extends Serializable> implements DAO<T, Id> {
     
@@ -27,24 +28,41 @@ public class DAOImpl<T, Id extends Serializable> implements DAO<T, Id> {
         this.sessionFactory = sessionFactory;
     }
  
-    private Session getSession() {
+    protected Session getSession() {
         return sessionFactory.getCurrentSession();
     }
     
+    @Transactional
     @Override
     public T find(Id id) {
         Object o = getSession().get(dataClass, id);
         return dataClass.cast(o);
     }
 
+    @Transactional
     @Override
     public Collection<T> findAll() {
         return findByCriteria();
     }
     
+    @Transactional
     @Override
     public Collection<T> findByExample(T example, String... excludes) {
         Session session = getSession();
+        /*SQLQuery a = session.createSQLQuery("").setResultTransformer(new ResultTransformer() {
+            
+            @Override
+            public Object transformTuple(Object[] tuple, String[] aliases) {
+                // TODO Auto-generated method stub
+                return null;
+            }
+            
+            @Override
+            public List transformList(List collection) {
+                // TODO Auto-generated method stub
+                return null;
+            }
+        });*/
         return findByExample(session, example, excludes);
     }
     
@@ -61,6 +79,7 @@ public class DAOImpl<T, Id extends Serializable> implements DAO<T, Id> {
         return result;
     }
 
+    @Transactional
     @Override
     public Collection<T> findByCriteria(Criterion... criterion) {
         Session session = getSession();
@@ -78,11 +97,13 @@ public class DAOImpl<T, Id extends Serializable> implements DAO<T, Id> {
         return result;
     }
     
+    @Transactional
     @Override
     public void save(T entity) {
         getSession().save(entity);
     }
 
+    @Transactional
     @Override
     public void delete(T entity) {
         getSession().delete(entity);
