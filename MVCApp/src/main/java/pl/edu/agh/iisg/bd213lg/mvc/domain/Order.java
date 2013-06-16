@@ -81,11 +81,11 @@ public class Order implements java.io.Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "EmployeeID")
-    public Employee getEmployees() {
+    public Employee getEmployee() {
         return this.employee;
     }
 
-    public void setEmployees(Employee employees) {
+    public void setEmployee(Employee employees) {
         this.employee = employees;
     }
 

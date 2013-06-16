@@ -82,31 +82,7 @@ public class EmployeeDAOImplHQL extends DAOImpl<Employee, Integer> implements
             int maxQuantity) {
         System.out.println("Best employees, object way");
         Session s = getSession();
-        
-        
-        
-        Query dupa = s.createQuery(
-                "select e.firstName, e.lastName, sum(d.quantity * d.unitPrice), best.orderDate\n" + 
-        		"from Orders best \n" + 
-        		"join best.employee e \n" + 
-        		"join best.orderDetails d\n" + 
-        		"where (\n" + 
-        		"    select sum (od.quantity * od.unitPrice) \n" + 
-        		"    from best.orderDetails od\n" + 
-        		") >= all (\n" + 
-        		"    select sum(od.quantity * od.unitPrice)\n" + 
-        		"    from e.orders oo join oo.orderDetails od\n" + 
-        		"    group by oo\n" + 
-        		") \n" + 
-        		"group by e\n");
-        System.out.println("Query results:");
-        for (Object o: dupa.list()) {
-            System.out.println(Arrays.toString((Object[]) o));
-        }
-        
-        
-        
-        
+
         
         Query q = s.createQuery(query)
             .setInteger("year", year)

@@ -262,7 +262,7 @@ public class Employee implements java.io.Serializable {
         this.salary = salary;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employees")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
     public Set<Order> getOrders() {
         return this.orders;
     }

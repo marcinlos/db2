@@ -1,14 +1,18 @@
 package pl.edu.agh.iisg.bd213lg.mvc.domain;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -24,6 +28,9 @@ public class Product {
     @Column(length = 40, nullable = false)
     private String ProductName;
     
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    private Set<OrderDetails> orderDetails = new HashSet<OrderDetails>(0);
+    
     //@Column
     //private int SupplierID;
     
@@ -31,8 +38,9 @@ public class Product {
     @JoinColumn(name = "SupplierID")
     private Supplier supplier;
     
-    @Column
-    private int CategoryID;
+    @ManyToOne
+    @JoinColumn(name = "CategoryID")
+    private Category category;
     
     @Column(length = 20)
     private String QuantityPerUnit;
@@ -82,12 +90,12 @@ public class Product {
         this.supplier = supplier;
     }
 
-    public int getCategoryID() {
-        return CategoryID;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryID(int categoryID) {
-        CategoryID = categoryID;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public String getQuantityPerUnit() {
@@ -136,6 +144,10 @@ public class Product {
 
     public void setDiscontinued(boolean discontinued) {
         Discontinued = discontinued;
+    }
+    
+    public Set<OrderDetails> getOrderDetails() {
+        return this.orderDetails;
     }
 
 }

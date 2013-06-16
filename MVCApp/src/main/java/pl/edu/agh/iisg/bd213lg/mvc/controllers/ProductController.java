@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import pl.edu.agh.iisg.bd213lg.mvc.dao.EmployeeDAO;
@@ -17,20 +18,21 @@ import pl.edu.agh.iisg.bd213lg.mvc.domain.EmployeeStats;
 import pl.edu.agh.iisg.bd213lg.mvc.domain.ProductStats;
 
 @Controller
-@RequestMapping("/employee")
-public class EmployeeController {
+@RequestMapping("/product")
+public class ProductController {
 
-    @Resource(name = "EmployeeDAO")
-    private EmployeeDAO employees;
+    
+    @Resource(name = "ProductDAOHQL")
+    private ProductDAO products;
     
     @RequestMapping(value = "/best", method = RequestMethod.GET)
-    public ModelAndView bestEmployees(
-            @RequestParam("top") int top,
-            @RequestParam("year") int year,
-            @RequestParam("quantity") int quantity) {
-        List<EmployeeStats> stats = employees.getBestEmployees(top, year,
-                quantity);
-        
-        return new ModelAndView("best", "employees", stats);
+    @ResponseBody
+    public String best() {
+        List<ProductStats> best = products.getBestProducts();
+        StringBuilder sb = new StringBuilder();
+        for (ProductStats s: best) {
+            sb.append(s).append("<br>");
+        }
+        return sb.toString();
     }
 }

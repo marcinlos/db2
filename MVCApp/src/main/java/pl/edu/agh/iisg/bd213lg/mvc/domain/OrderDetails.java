@@ -24,6 +24,7 @@ public class OrderDetails implements java.io.Serializable {
     
     private OrderDetailsId id;
     private Order order;
+    private Product product;
     private BigDecimal unitPrice;
     private short quantity;
     private double discount;
@@ -67,6 +68,17 @@ public class OrderDetails implements java.io.Serializable {
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+    
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ProductID", nullable = false, insertable = false, updatable = false)
+    public Product getProduct() {
+        return this.product;
+    }
+    
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Column(name = "UnitPrice", nullable = false, precision = 10, scale = 4)
