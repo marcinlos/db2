@@ -6,8 +6,6 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.Example;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pl.edu.agh.iisg.bd213lg.hellodb.domain.Customer;

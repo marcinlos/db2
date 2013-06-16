@@ -1,5 +1,6 @@
 package pl.edu.agh.iisg.bd213lg.mvc.dao;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -18,7 +19,7 @@ public class EmployeeDAOImplHQL extends DAOImpl<Employee, Integer> implements
         EmployeeDAO {
     
     private String query = 
-        "select new pl.edu.agh.iisg.bd213lg.mvc.domain.EmployeeStats(                                                     \n" +
+        "select new pl.edu.agh.iisg.bd213lg.mvc.domain.EmployeeStats(\n" +
         "    e.firstName as firstName,                               \n" +
         "    e.lastName as lastName,                                 \n" +
         "    concat(b.titleOfCourtesy, ' ', b.firstName, ' ',        \n" +
@@ -37,7 +38,7 @@ public class EmployeeDAOImplHQL extends DAOImpl<Employee, Integer> implements
         "    select sum(odd.quantity * odd.unitPrice)                \n" +
         "    from bestOrder.orderDetails odd                         \n" +
         "    ) as maxValue,                                          \n" +
-        "    bestOrder.customer.CompanyName as customer)              \n" +
+        "    bestOrder.customer.CompanyName as customer)             \n" +
         "from Employee e                                             \n" +
         "join e.supervisor b                                         \n" +
         "join e.orders as o                                          \n" +
@@ -81,6 +82,32 @@ public class EmployeeDAOImplHQL extends DAOImpl<Employee, Integer> implements
             int maxQuantity) {
         System.out.println("Best employees, object way");
         Session s = getSession();
+        
+        
+        
+        Query dupa = s.createQuery(
+                "select e.firstName, e.lastName, sum(d.quantity * d.unitPrice), best.orderDate\n" + 
+        		"from Orders best \n" + 
+        		"join best.employee e \n" + 
+        		"join best.orderDetails d\n" + 
+        		"where (\n" + 
+        		"    select sum (od.quantity * od.unitPrice) \n" + 
+        		"    from best.orderDetails od\n" + 
+        		") >= all (\n" + 
+        		"    select sum(od.quantity * od.unitPrice)\n" + 
+        		"    from e.orders oo join oo.orderDetails od\n" + 
+        		"    group by oo\n" + 
+        		") \n" + 
+        		"group by e\n");
+        System.out.println("Query results:");
+        for (Object o: dupa.list()) {
+            System.out.println(Arrays.toString((Object[]) o));
+        }
+        
+        
+        
+        
+        
         Query q = s.createQuery(query)
             .setInteger("year", year)
             .setInteger("maxQuantity", maxQuantity)

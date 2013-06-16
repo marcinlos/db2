@@ -8,7 +8,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pl.edu.agh.iisg.bd213lg.hellodb.domain.Customer;
 import pl.edu.agh.iisg.bd213lg.hellodb.domain.Shipper;
 
 public class ShipperDAOImpl implements ShipperDAO  {
